@@ -18,26 +18,17 @@ def generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
     # The generated pages are written to the public directory in the same directory structure.
 
     # Check if current path is file?
-    #print(f"*** CURRENT PATH IS {dir_path_content}")
-    #print("*** IS CURRENT PATH FILE?")
     if os.path.isfile(dir_path_content):
-        #print("*** CURRENT PATH IS FILE")
         generate_page(dir_path_content, template_path, dest_dir_path.rstrip("md")+"html")
-        #print(f"""*** GENERATED PAGE FOR {dir_path_content} at {dest_dir_path.rstrip("md")+"html"} using {template_path}""")
-
-    #print("*** CURRENT PATH IS NOT FILE")
+        
     # Check if current path is directory?
     if os.path.isdir(dir_path_content):
-        #print("*** CURRENT PATH IS DIR")
         # Check that destination path exists and if not, create it
         if not os.path.exists(dest_dir_path):
-            #print("*** DEST DIR DOES NOT EXIST")
             os.mkdir(dest_dir_path)
-            #print(f"*** CREATED DEST DIR AT {dest_dir_path}")
         # Recursively run through each nested item
         
         for sub in os.listdir(dir_path_content):
-            #print(f"*** RECURSING INTO {os.path.join(dir_path_content, sub)} WITH DEST DIR {os.path.join(dest_dir_path, sub)} USING {template_path}")
             generate_pages_recursive(
                 os.path.join(dir_path_content, sub),
                 template_path,
